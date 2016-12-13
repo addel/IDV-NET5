@@ -1,6 +1,8 @@
 # IDV-NET5
 
 Required:
+
+Visual Studio 2014
 SQL EXPRESS (defaut install)
 Have seen videos number 05 & 06 of IDV-NET5 UV ETNA
 
