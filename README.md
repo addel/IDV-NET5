@@ -13,5 +13,8 @@ You need to create Db from model like "bin/console doctrine:schema:update --forc
 
 Go in your repository folder:
 open terminal or CMD and tape:
-"dotnet ef migration add init"
+"dotnet ef migrations add nameyouwant"
 "dotnet ef database update"
+
+to remove a migration:
+"dotnet ef migrations remove"
