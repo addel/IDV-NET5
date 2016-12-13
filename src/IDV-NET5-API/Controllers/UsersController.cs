@@ -1,7 +1,9 @@
 ﻿using IDV_NET5_API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,14 +24,27 @@ namespace IDV_NET5_API.Controllers
         public void Post([FromBody]User value)
         {
             // TODO check insert
-            _context.Users.Add(value);
+            try
+            {
+                _context.User.Add(value);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateException e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+
         }
 
         // GET api/users/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var user = _context.Users.FirstOrDefault(p => p.Id == id);
+            var user = _context.User.FirstOrDefault(p => p.Id == id);
             if (user != null)
                 return Ok(user);
 

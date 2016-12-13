@@ -197,6 +197,7 @@
 --reference:C:\Users\addel.aloui\.nuget\packages\System.Xml.ReaderWriter\4.0.11\ref\netstandard1.3\System.Xml.ReaderWriter.dll
 --reference:C:\Users\addel.aloui\.nuget\packages\System.Xml.XDocument\4.0.11\ref\netstandard1.3\System.Xml.XDocument.dll
 --resource:"C:\Users\addel.aloui\Desktop\IDV-NET5-API\src\IDV-NET5-API\obj\Debug\netcoreapp1.0\IDV-NET5-APIdotnet-compile.deps.json",IDV-NET5-API.deps.json
+C:\Users\addel.aloui\Desktop\IDV-NET5-API\src\IDV-NET5-API\ITodoRepository.cs
 C:\Users\addel.aloui\Desktop\IDV-NET5-API\src\IDV-NET5-API\Program.cs
 C:\Users\addel.aloui\Desktop\IDV-NET5-API\src\IDV-NET5-API\Startup.cs
 C:\Users\addel.aloui\Desktop\IDV-NET5-API\src\IDV-NET5-API\Controllers\MoviesController.cs
