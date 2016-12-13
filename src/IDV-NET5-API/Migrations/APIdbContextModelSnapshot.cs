@@ -57,7 +57,7 @@ namespace IDVNET5API.Migrations
 
                     b.HasIndex("CommentId");
 
-                    b.ToTable("Movies");
+                    b.ToTable("Movie");
                 });
 
             modelBuilder.Entity("IDV_NET5_API.Models.User", b =>

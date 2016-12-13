@@ -12,7 +12,7 @@ namespace IDV_NET5_API.Models
         {
         }
 
-        public DbSet<Movie> Movies { set; get; }
+        public DbSet<Movie> Movie { set; get; }
         public DbSet<User> User { set; get; }
 
     }
