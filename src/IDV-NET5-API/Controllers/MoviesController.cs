@@ -1,17 +1,13 @@
 ﻿using IDV_NET5_API.Models;
 using IDV_NET5_API.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using System;
 
 namespace IDV_NET5_API.Controllers
 {
     [Route("api/[controller]")]
-    public class MoviesController : Controller
+    public class MoviesController : MasterController<Movie>
     {
         private IMovieRepository _movieRepository;
 
@@ -20,29 +16,42 @@ namespace IDV_NET5_API.Controllers
             _movieRepository = movieRepository;
         }
 
+
         // POST api/movies
         [HttpPost]
-        public void Post([FromBody]Movie value)
-        {      
-           
+        public override void Post([FromBody]Movie value)
+        {
+            _movieRepository.Add(value);
+            _movieRepository.Commit();
 
+        }
+
+        // GET api/movies/
+        [HttpGet]
+        public override IActionResult Get()
+        {
+            IEnumerable<Movie> _movie = _movieRepository.GetAll();
+    
+            return CheckAllResult(_movie);
         }
 
         // GET api/movies/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public override IActionResult Get(int id)
         {
-            Movie _movie = _movieRepository.GetSingle(u => u.Id == id);
+            Movie _movie = _movieRepository.GetSingle(id);
 
-            if (_movie != null)
-            {
-                return new OkObjectResult(_movie);  
-            }
-            else
-            {
-                return NotFound();
-            }
+            return CheckResult(_movie);
         }
 
+        public override void Put(int id, [FromBody] Movie value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -13,17 +13,12 @@ namespace IDV_NET5_API.Models.Repository
         // On vois ici pourquoi j'ai créer une interface de mes entity, cela va me permettre un gain de code donc de temps
         // Ainsi en créant mon propre type chaque repository pouura implémenté cette interface (MyEntity == UserRepository, MovieRepository, CommentRepository)
 
-        IEnumerable<MyEntity> AllIncluding(params Expression<Func<MyEntity, object>>[] includeProperties);
         IEnumerable<MyEntity> GetAll();
         int Count();
         MyEntity GetSingle(int id);
-        MyEntity GetSingle(Expression<Func<MyEntity, bool>> predicate);
-        MyEntity GetSingle(Expression<Func<MyEntity, bool>> predicate, params Expression<Func<MyEntity, object>>[] includeProperties);
-        IEnumerable<MyEntity> FindBy(Expression<Func<MyEntity, bool>> predicate);
         void Add(MyEntity entity);
         void Update(MyEntity entity);
         void Delete(MyEntity entity);
-        void DeleteWhere(Expression<Func<MyEntity, bool>> predicate);
         void Commit();
     }
 }

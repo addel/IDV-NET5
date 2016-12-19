@@ -1,56 +1,57 @@
-﻿using IDV_NET5_API.Models;
+﻿using System;
+using IDV_NET5_API.Models;
 using IDV_NET5_API.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace IDV_NET5_API.Controllers
 {
     [Route("api/[controller]")]
-    public class UsersController : Controller
+    public class UsersController : MasterController<User>
     {
-        private readonly APIdbContext _context;
+        private IUserRepository _userRepository;
 
-        public UsersController(APIdbContext context)
+        public UsersController(IUserRepository userRepository)
         {
-            _context = context;
+            _userRepository = userRepository;
         }
 
         // POST api/users
         [HttpPost]
-        public void Post([FromBody]User value)
+        public override void Post([FromBody]User value)
         {
             // TODO check insert
-            try
-            {
-                _context.User.Add(value);
-                _context.SaveChanges();
-            }
-            catch (DbUpdateException e)
-            {
-                Debug.WriteLine(e.Message);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.Message);
-            }
+            _userRepository.Add(value);
+            _userRepository.Commit();
 
         }
 
         // GET api/users/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public override IActionResult Get(int id)
         {
-            var user = _context.User.FirstOrDefault(p => p.Id == id);
-            if (user != null)
-                return Ok(user);
-
-            return NotFound();
+            var user = _userRepository.GetSingle(id);
+            return CheckResult(user);
         }
 
+        // GET api/users/
+        [HttpGet]
+        public override IActionResult Get()
+        {
+            IEnumerable<User> _user = _userRepository.GetAll();
+
+            return CheckAllResult(_user);
+        }
+
+        // viens de la class abstraite (MasterController) pour vous amis dev vous dire qu'il faut absolument codé ces methodes
+        public override void Put(int id, [FromBody] User value)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

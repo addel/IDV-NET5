@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
@@ -27,40 +28,10 @@ namespace IDV_NET5_API.Models.Repository
         {
             return _context.Set<MyEntity>().Count();
         }
-        public virtual IEnumerable<MyEntity> AllIncluding(params Expression<Func<MyEntity, object>>[] includeProperties)
-        {
-            IQueryable<MyEntity> query = _context.Set<MyEntity>();
-            foreach (var includeProperty in includeProperties)
-            {
-                query = query.Include(includeProperty);
-            }
-            return query.AsEnumerable();
-        }
 
         public MyEntity GetSingle(int id)
         {
             return _context.Set<MyEntity>().FirstOrDefault(x => x.Id == id);
-        }
-
-        public MyEntity GetSingle(Expression<Func<MyEntity, bool>> predicate)
-        {
-            return _context.Set<MyEntity>().FirstOrDefault(predicate);
-        }
-
-        public MyEntity GetSingle(Expression<Func<MyEntity, bool>> predicate, params Expression<Func<MyEntity, object>>[] includeProperties)
-        {
-            IQueryable<MyEntity> query = _context.Set<MyEntity>();
-            foreach (var includeProperty in includeProperties)
-            {
-                query = query.Include(includeProperty);
-            }
-
-            return query.Where(predicate).FirstOrDefault();
-        }
-
-        public virtual IEnumerable<MyEntity> FindBy(Expression<Func<MyEntity, bool>> predicate)
-        {
-            return _context.Set<MyEntity>().Where(predicate);
         }
 
         public virtual void Add(MyEntity entity)
@@ -78,16 +49,6 @@ namespace IDV_NET5_API.Models.Repository
         {
             EntityEntry dbEntityEntry = _context.Entry<MyEntity>(entity);
             dbEntityEntry.State = EntityState.Deleted;
-        }
-
-        public virtual void DeleteWhere(Expression<Func<MyEntity, bool>> predicate)
-        {
-            IEnumerable<MyEntity> entities = _context.Set<MyEntity>().Where(predicate);
-
-            foreach (var entity in entities)
-            {
-                _context.Entry<MyEntity>(entity).State = EntityState.Deleted;
-            }
         }
 
         public virtual void Commit()
