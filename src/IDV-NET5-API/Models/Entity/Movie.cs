@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace IDV_NET5_API.Models
+namespace IDV_NET5_API.Models.Entity
 {
-    public class Movie
+    public class Movie : IEntityBase
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -13,7 +13,7 @@ namespace IDV_NET5_API.Models
         public string Version { get; set; }
         public string Quality { get; set; }
         public string Link { get; set; }
-        public float sizeFile { get; set; }
-        public Comment Comment { get; set; }
+        public float SizeFile { get; set; }
+        public ICollection<Comment> Comment { get; set; }
     }
 }

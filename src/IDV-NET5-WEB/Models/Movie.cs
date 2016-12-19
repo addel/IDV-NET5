@@ -14,6 +14,6 @@ namespace IDV_NET5_WEB.Models
         public string Quality { get; set; }
         public string Link { get; set; }
         public float sizeFile { get; set; }
-        public Comment Comment { get; set; }
+        public ICollection<Comment> Comment { get; set; }
     }
 }

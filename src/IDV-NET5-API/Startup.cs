@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using IDV_NET5_API.Models;
 using Microsoft.EntityFrameworkCore;
+using IDV_NET5_API.Models.Repository;
 
 namespace IDV_NET5_API
 {
@@ -24,7 +25,7 @@ namespace IDV_NET5_API
             Configuration = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfigurationRoot Configuration { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -32,8 +33,13 @@ namespace IDV_NET5_API
             // Add framework services.
             services.AddMvc();
 
-            // Attention c'est le path de ma béquane
+            // link de la bdd voir appsetting.s.json // Pas reussi a appeler le path db depuis le appsetting.json
             services.AddDbContext<APIdbContext>(options => options.UseSqlServer("Data Source=UC2591\\SQLEXPRESS;Initial Catalog=IDV-NET5;Integrated Security=True;Pooling=False"));
+
+            // On add les Repository
+            services.AddScoped<IMovieRepository, MovieRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using IDV_NET5_API.Models.Entity;
 
 namespace IDV_NET5_API.Models
 {
@@ -14,6 +15,7 @@ namespace IDV_NET5_API.Models
 
         public DbSet<Movie> Movie { set; get; }
         public DbSet<User> User { set; get; }
+        public DbSet<Comment> Comment { set; get; }
 
     }
 }

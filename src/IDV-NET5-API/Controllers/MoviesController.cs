@@ -1,4 +1,5 @@
 ﻿using IDV_NET5_API.Models;
+using IDV_NET5_API.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,31 +13,18 @@ namespace IDV_NET5_API.Controllers
     [Route("api/[controller]")]
     public class MoviesController : Controller
     {
-        private readonly APIdbContext _context;
+        private IMovieRepository _movieRepository;
 
-        public MoviesController(APIdbContext context)
+        public MoviesController(IMovieRepository movieRepository)
         {
-            _context = context;
+            _movieRepository = movieRepository;
         }
 
         // POST api/movies
         [HttpPost]
         public void Post([FromBody]Movie value)
         {      
-            // TODO check insert
-            try
-            {
-                _context.Movie.Add(value);
-                _context.SaveChanges();
-            }
-            catch (DbUpdateException e)
-            {
-                Debug.WriteLine(e.Message);
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.Message);
-            }
+           
 
         }
 
@@ -44,11 +32,16 @@ namespace IDV_NET5_API.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var movie = _context.Movie.FirstOrDefault(p => p.Id == id);
-            if (movie != null)
-                return Ok(movie);
+            Movie _movie = _movieRepository.GetSingle(u => u.Id == id);
 
-            return NotFound();
+            if (_movie != null)
+            {
+                return new OkObjectResult(_movie);  
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
     }

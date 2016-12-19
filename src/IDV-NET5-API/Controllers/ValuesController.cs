@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
+// Ici c'est une class auto generer, je l'ai garder pour pouvoir avoir un apercu de tout les verbe HTTP
 namespace IDV_NET5_API.Controllers
 {
     [Route("api/[controller]")]

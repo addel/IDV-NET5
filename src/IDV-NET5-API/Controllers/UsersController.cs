@@ -1,4 +1,5 @@
 ﻿using IDV_NET5_API.Models;
+using IDV_NET5_API.Models.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
