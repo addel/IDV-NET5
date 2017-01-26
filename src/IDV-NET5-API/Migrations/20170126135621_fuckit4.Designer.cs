@@ -8,9 +8,10 @@ using IDV_NET5_API.Models;
 namespace IDVNET5API.Migrations
 {
     [DbContext(typeof(APIdbContext))]
-    partial class APIdbContextModelSnapshot : ModelSnapshot
+    [Migration("20170126135621_fuckit4")]
+    partial class fuckit4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")

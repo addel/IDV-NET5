@@ -12,5 +12,7 @@ namespace IDV_NET5_API.Models.Entity
         public string Email { set; get; }
         public string Firstname { set; get; }
         public string Lastname { set; get; }
+
+        public List<Comment> Comments { set; get; }
     }
 }
