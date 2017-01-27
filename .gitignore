@@ -3,3 +3,4 @@ src/IDV-NET5-API/bin/Debug
 src/IDV-NET5-WEB/obj/Debug
 src/IDV-NET5-WEB/bin/Debug
 .vs/
+src/IDV-NET5-API/Migrations
