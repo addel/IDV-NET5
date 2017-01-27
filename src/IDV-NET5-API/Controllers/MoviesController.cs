@@ -30,6 +30,7 @@ namespace IDV_NET5_API.Controllers
         [HttpGet]
         public override IActionResult Get()
         {
+            //useless comment
             IEnumerable<Movie> _movie = _movieRepository.GetAll();
     
             return CheckAllResult(_movie);
