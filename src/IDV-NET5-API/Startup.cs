@@ -34,7 +34,7 @@ namespace IDV_NET5_API
             services.AddMvc();
 
             // link de la bdd voir appsetting.s.json // Pas reussi a appeler le path db depuis le appsetting.json
-            services.AddDbContext<APIdbContext>(options => options.UseSqlServer("Data Source=PC-SABRY\\SQLEXPRESS;Initial Catalog=IDV-NET5;Integrated Security=True"));
+            services.AddDbContext<APIdbContext>(options => options.UseSqlServer("Data Source=.\\SQLEXPRESS;Initial Catalog=IDV-NET5;Integrated Security=True"));
 
             // On add les Repository
             services.AddScoped<IMovieRepository, MovieRepository>();
