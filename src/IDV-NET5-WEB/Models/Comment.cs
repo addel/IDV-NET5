@@ -10,6 +10,8 @@ namespace IDV_NET5_WEB.Models
         public int Id { set; get; }
         public string Text { set; get; }
         public string DateOfPost { set; get; }
-        public User User { set; get; }
+
+        public int VersionId { get; set; }
+        public Version Versions { get; set; }
     }
 }

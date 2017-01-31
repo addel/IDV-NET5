@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<IDV_NET5_WEB.Models.User>
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -65,6 +66,37 @@
     </a>
 </div>
 
+<div class="row">
+    <div class="col-md-12">
+        <h2>Registered Users</h2>
+        @if (Model.Any())
+        {
+            <table class="table">
+                <tr>
+                    <th>First name</th>
+                    <th>Fucknig last name</th>
+                    <th>It's 01:00 O clock username</th>
+                    <th>email</th>
+                </tr>
+                @foreach(var i in Model)
+                {
+                    <tr>
+                        <td>@i.FirstName</td>
+                        <td>@i.LastName</td>
+                        <td>@i.UserName</td>
+                        <td>@i.Email </td>
+                    </tr>
+
+                }    
+            </table>
+        }
+        else
+        {
+            <p>Nobody is in there. Where am I ????</p>
+
+        }
+    </div>
+</div>
 <div class="row">
     <div class="col-md-3">
         <h2>Application uses</h2>

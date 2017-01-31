@@ -29,6 +29,11 @@ namespace IDV_NET5_API.Models.Repository
             return _context.Set<MyEntity>().Count();
         }
 
+        public List<MyEntity> To_List()
+        {
+            return _context.Set<MyEntity>().ToList();
+        }
+
         public MyEntity GetSingle(int id)
         {
             return _context.Set<MyEntity>().FirstOrDefault(x => x.Id == id);

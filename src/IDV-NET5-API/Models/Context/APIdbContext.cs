@@ -18,6 +18,6 @@ namespace IDV_NET5_API.Models
         public DbSet<Comment> Comment { set; get; }
         public DbSet<Asso_movie_version> Asso_movie_version { set; get; }
         public DbSet<Entity.Version> Version { set; get; }
-
+        public object MyEntity { get; internal set; }
     }
 }
