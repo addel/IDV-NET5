@@ -20,10 +20,15 @@ namespace IDV_NET5_API.Controllers
         [HttpPost]
         public override void Post([FromBody]User value)
         {
-            // TODO check insert
-            _userRepository.Add(value);
-            _userRepository.Commit();
+               _userRepository.Add(value);
+               _userRepository.Commit();
+        }
 
+        // POST api/users/login
+        [HttpPost("login")]
+        public User Login([FromBody]User value)
+        {
+            return _userRepository.GetUserByLogin(value);
         }
 
         // GET api/users/5
@@ -32,6 +37,14 @@ namespace IDV_NET5_API.Controllers
         {
             var user = _userRepository.GetSingle(id);
             return CheckResult(user);
+        }
+
+        // GET api/users/list
+        [HttpGet("list")]
+        public List<User> To_list()
+        {
+            return _userRepository.To_List();
+
         }
 
         // GET api/users/

@@ -10,10 +10,8 @@ namespace IDV_NET5_WEB.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public string Version { get; set; }
-        public string Quality { get; set; }
-        public string Link { get; set; }
-        public float sizeFile { get; set; }
-        public ICollection<Comment> Comment { get; set; }
+        public string Realisator { get; set; }
+        public int Rating { get; set; }
+        public string Actor_principal { get; set; }
     }
 }
