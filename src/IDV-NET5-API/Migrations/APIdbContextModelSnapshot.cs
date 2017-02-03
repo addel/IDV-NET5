@@ -43,13 +43,9 @@ namespace IDVNET5API.Migrations
 
                     b.Property<string>("Text");
 
-                    b.Property<int?>("UserId");
-
                     b.Property<int>("VersionId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.HasIndex("VersionId");
 
@@ -81,13 +77,22 @@ namespace IDVNET5API.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Email");
+                    b.Property<string>("ConfirmPassword");
 
-                    b.Property<string>("Firstname");
+                    b.Property<string>("Email")
+                        .IsRequired();
 
-                    b.Property<string>("Lastname");
+                    b.Property<string>("FirstName")
+                        .IsRequired();
 
-                    b.Property<string>("Username");
+                    b.Property<string>("LastName")
+                        .IsRequired();
+
+                    b.Property<string>("Password")
+                        .IsRequired();
+
+                    b.Property<string>("UserName")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -129,10 +134,6 @@ namespace IDVNET5API.Migrations
 
             modelBuilder.Entity("IDV_NET5_API.Models.Entity.Comment", b =>
                 {
-                    b.HasOne("IDV_NET5_API.Models.Entity.User")
-                        .WithMany("Comments")
-                        .HasForeignKey("UserId");
-
                     b.HasOne("IDV_NET5_API.Models.Entity.Version", "Versions")
                         .WithMany("Comments")
                         .HasForeignKey("VersionId")
