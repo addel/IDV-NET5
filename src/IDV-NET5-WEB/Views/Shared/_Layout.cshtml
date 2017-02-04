@@ -8,60 +8,114 @@
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+        @*<link rel="stylesheet" href="~/css/site.css" />*@
+        <link href="~/css/style.css" rel="stylesheet" type="text/css"/>
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        @*<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />*@
+        <link href="~/css/style.css" rel="stylesheet" type="text/css" asp-append-version="true"/>
+
     </environment>
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">IDV_NET5_WEB</a>
+@*<body id="page2">
+    <div  class="navbar navbar-inverse navbar-fixed-top tail-bottom">
+        <div id="main">
+       
+            <div id="header">
+                <div class="row-1">
+                    <div class="fleft"><a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">IDV_NET5_WEB: Cinema <span>World</span></a></div>
+                    <ul>
+                        @if (Context.Session.GetString("ID") != null)
+                        {
+                            <li><a asp-area="" asp-controller="Home" asp-action="Logout"><img src="images/icon3.gif" alt="" /> Logout</a></li>
+                        }
+                        else
+                        {
+                            <li><a asp-area="" asp-controller="Home" asp-action="Register">Register</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Login">Login</a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="row-2">
+                    <ul>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Movie">Movies</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    @if (Context.Session.GetString("ID") != null)
-                    {
-                        <li><a asp-area="" asp-controller="Home" asp-action="Logout">Logout</a></li>
-                    }
-                    else
-                    {
-                        <li><a asp-area="" asp-controller="Home" asp-action="Register">Register</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="Login">Login</a></li>
 
-                    }
+        </div>
+    </div>
+    
+</body>*@
 
-                    
-                </ul>
+<body id="page2">
+    <div class="tail-top">
+        <div class="tail-bottom">
+            <div id="main">
+                <!-- HEADER -->
+                <div id="header">
+                    <div class="row-1">
+                        <div class="fleft"><a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">IDV_NET5_WEB: Cinema <span>World</span></a></div>
+                        <ul>
+                            @if (Context.Session.GetString("ID") != null)
+                            {
+                                <li><a asp-area="" asp-controller="Home" asp-action="Logout"><img src="images/icon3.gif" alt="" /> Logout</a></li>
+                            }
+                            else
+                            {
+                                <li><a asp-area="" asp-controller="Home" asp-action="Register">Register</a></li>
+                                <li><a asp-area="" asp-controller="Home" asp-action="Login">Login</a></li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="row-2">
+                        <ul>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="Movie">Movies</a></li>
+                            <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                            <li class="last"><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- CONTENT -->
+
+                @RenderBody()
+
+
+                <!-- FOOTER -->
+                <hr />
+                <footer>
+                    <p>&copy; 2016 - IDV_NET5_WEB</p>
+                    <div id="footer">
+                        <div class="left">
+                            <div class="right">
+                                <div class="inside">
+                                    Copyright - Dropshippers Team<br />
+                                    Website template designed by <a class="new_window" href="#" target="_blank" rel="nofollow">www.don'tClick.com</a><br />
+                                    Hadopi provided by <a class="new_window" href="#" target="_blank" rel="nofollow">www.fuckYou.com</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2016 - IDV_NET5_WEB</p>
-        </footer>
-    </div>
-
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/cufon-yui.js" type="text/javascript"></script>
+        <script src="~/js/cufon-replace.js" type="text/javascript"></script>
+        <script src="~/js/Gill_Sans_400.font.js" type="text/javascript"></script>
+        <script src="~/js/script.js" type="text/javascript"></script>
+
     </environment>
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -74,7 +128,7 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-
     @RenderSection("scripts", required: false)
 </body>
+
 </html>
