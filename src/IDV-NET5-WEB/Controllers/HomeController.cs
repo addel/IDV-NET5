@@ -20,9 +20,7 @@ namespace IDV_NET5_WEB.Controllers
 
         public IActionResult Index()
         {
-            List<User> user = _service.List();
-
-            return View(user);
+            return View();
         }
 
         public IActionResult About()
@@ -77,8 +75,9 @@ namespace IDV_NET5_WEB.Controllers
         {
             if(HttpContext.Session.GetString("ID") != null)
             {
+                List<User> user = _service.List();
                 ViewBag.Username = HttpContext.Session.GetString("username");
-                return View();
+                return View(user);
             }
             else
             {
