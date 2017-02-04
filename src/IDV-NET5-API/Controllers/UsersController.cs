@@ -62,9 +62,22 @@ namespace IDV_NET5_API.Controllers
             throw new NotImplementedException();
         }
 
+        // Patch api/users/5
+        [HttpPatch("{id}")]
+        public void Patch(int id, [FromBody] User value)
+        {
+            value.Id = id;
+            _userRepository.Update(value);
+            _userRepository.Commit();
+        }
+
+        // delete api/users/5
+        [HttpDelete("{id}")]
         public override void Delete(int id)
         {
-            throw new NotImplementedException();
+            User user = _userRepository.GetSingle(id);
+            _userRepository.Delete(user);
+            _userRepository.Commit();
         }
     }
 }
