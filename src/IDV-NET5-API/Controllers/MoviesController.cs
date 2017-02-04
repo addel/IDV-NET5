@@ -45,14 +45,30 @@ namespace IDV_NET5_API.Controllers
             return CheckResult(_movie);
         }
 
+        // Put api/movies/5
+        [HttpPut("{id}")]
         public override void Put(int id, [FromBody] Movie value)
         {
             throw new NotImplementedException();
         }
 
+        // Patch api/movies/5
+        [HttpPatch("{id}")]
+        public void Patch(int id, [FromBody] Movie value)
+        {
+            //Movie movie = _movieRepository.GetSingle(id);
+            value.Id = id;
+            _movieRepository.Update(value);
+            _movieRepository.Commit();
+        }
+
+        // delete api/movies/5
+        [HttpDelete("{id}")]
         public override void Delete(int id)
         {
-            throw new NotImplementedException();
+            Movie movie = _movieRepository.GetSingle(id);
+            _movieRepository.Delete(movie);
+            _movieRepository.Commit();
         }
     }
 }
