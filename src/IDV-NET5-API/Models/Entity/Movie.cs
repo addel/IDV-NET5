@@ -13,5 +13,9 @@ namespace IDV_NET5_API.Models.Entity
         public string Realisator { get; set; }
         public int Rating { get; set; }
         public string Actor_principal { get; set; }
+        public string Picture_link { get; set; }
+        public string File_link { get; set; }
+        public string Language { get; set; }
+        public List<Comment> Comments { set; get; }
     }
 }

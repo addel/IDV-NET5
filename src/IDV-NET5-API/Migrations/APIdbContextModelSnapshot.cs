@@ -16,38 +16,22 @@ namespace IDVNET5API.Migrations
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("IDV_NET5_API.Models.Entity.Asso_movie_version", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("MoviesId");
-
-                    b.Property<int>("VersionId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MoviesId");
-
-                    b.HasIndex("VersionId");
-
-                    b.ToTable("Asso_movie_version");
-                });
-
             modelBuilder.Entity("IDV_NET5_API.Models.Entity.Comment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("DateOfPost");
+                    b.Property<DateTime>("DateOfPost");
+
+                    b.Property<int>("MovieId");
 
                     b.Property<string>("Text");
 
-                    b.Property<int>("VersionId");
+                    b.Property<string>("Username");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("VersionId");
+                    b.HasIndex("MovieId");
 
                     b.ToTable("Comment");
                 });
@@ -60,6 +44,12 @@ namespace IDVNET5API.Migrations
                     b.Property<string>("Actor_principal");
 
                     b.Property<string>("Description");
+
+                    b.Property<string>("File_link");
+
+                    b.Property<string>("Language");
+
+                    b.Property<string>("Picture_link");
 
                     b.Property<int>("Rating");
 
@@ -99,44 +89,11 @@ namespace IDVNET5API.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("IDV_NET5_API.Models.Entity.Version", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Download_link");
-
-                    b.Property<string>("Edition");
-
-                    b.Property<string>("Language");
-
-                    b.Property<string>("Quality");
-
-                    b.Property<DateTime>("created_at");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Version");
-                });
-
-            modelBuilder.Entity("IDV_NET5_API.Models.Entity.Asso_movie_version", b =>
-                {
-                    b.HasOne("IDV_NET5_API.Models.Entity.Movie", "Movies")
-                        .WithMany()
-                        .HasForeignKey("MoviesId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("IDV_NET5_API.Models.Entity.Version", "Version")
-                        .WithMany()
-                        .HasForeignKey("VersionId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("IDV_NET5_API.Models.Entity.Comment", b =>
                 {
-                    b.HasOne("IDV_NET5_API.Models.Entity.Version", "Versions")
+                    b.HasOne("IDV_NET5_API.Models.Entity.Movie")
                         .WithMany("Comments")
-                        .HasForeignKey("VersionId")
+                        .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

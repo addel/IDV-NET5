@@ -9,9 +9,9 @@ namespace IDV_NET5_API.Models.Entity
     {
         public int Id { set; get; }
         public string Text { set; get; }
-        public string DateOfPost { set; get; }
+        public string Username { get; set; }
+        public DateTime DateOfPost { set; get; }
 
-        public int VersionId { get; set; }
-        public Version Versions { get; set; }
+        public int MovieId { get; set; }
     }
 }

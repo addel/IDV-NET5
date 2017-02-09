@@ -40,7 +40,6 @@ namespace IDV_NET5_API
             services.AddScoped<IMovieRepository, MovieRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICommentRepository, CommentRepository>();
-            services.AddScoped<IVersionRepository, VersionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
