@@ -11,7 +11,6 @@ namespace IDV_NET5_API.Models.Entity
         public string Text { set; get; }
         public string Username { get; set; }
         public DateTime DateOfPost { set; get; }
-
         public int MovieId { get; set; }
     }
 }

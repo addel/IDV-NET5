@@ -21,5 +21,6 @@ namespace IDV_NET5_API.Models.Repository
         void Delete(MyEntity entity);
         void Commit();
         List<MyEntity> To_List();
+        List<MyEntity> GetByMovie(int id);
     }
 }
