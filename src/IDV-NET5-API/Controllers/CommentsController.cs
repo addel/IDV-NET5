@@ -44,6 +44,16 @@ namespace IDV_NET5_API.Controllers
             return CheckResult(_comment);
         }
 
+        // GET api/comments/movie/1
+        [HttpGet("movie/{id}")]
+        public IActionResult GetByMovie(int id)
+        {
+            IEnumerable<Comment> _comment = _commentRepository.GetAll();
+            _comment = _commentRepository.GetByMovie(id);
+
+            return CheckAllResult(_comment);
+        }
+
         // Put api/comments/5
         [HttpPut("{id}")]
         public override void Put(int id, [FromBody] Comment value)

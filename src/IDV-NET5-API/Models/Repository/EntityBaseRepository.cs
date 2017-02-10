@@ -39,6 +39,11 @@ namespace IDV_NET5_API.Models.Repository
             return _context.Set<MyEntity>().FirstOrDefault(x => x.Id == id);
         }
 
+        public virtual List<MyEntity> GetByMovie(int id)
+        {
+            return _context.Set<MyEntity>().ToList();
+        }
+
         public virtual void Add(MyEntity entity)
         {
             EntityEntry dbEntityEntry = _context.Entry<MyEntity>(entity);

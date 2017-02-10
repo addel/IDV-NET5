@@ -26,7 +26,7 @@ namespace IDV_NET5_API.Models.Entity
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Compare("Password", ErrorMessage = "Password do'nt match")]
+        [Compare("Password", ErrorMessage = "Password don't match")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
     }
