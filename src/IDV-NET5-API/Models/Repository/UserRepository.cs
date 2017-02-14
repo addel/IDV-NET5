@@ -20,5 +20,13 @@ namespace IDV_NET5_API.Models.Repository
             User res = _context.User.Where(u => u.UserName == user.UserName && u.Password == user.Password).FirstOrDefault();
             return res;
         }
+
+        public User GetUserByName(string name)
+        {
+            User res = _context.User.Where(u => u.UserName == name).FirstOrDefault();
+            return res;
+        }
+
+
     }
 }

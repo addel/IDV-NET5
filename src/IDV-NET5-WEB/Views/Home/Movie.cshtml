@@ -1,11 +1,21 @@
 ﻿@{
-    ViewData["Title"] = "Movies";
+    ViewData["Title"] = @Model.Title;
 }
 <h2>@ViewData["Title"].</h2>
 
-<li>
-    <ul>@Model.Id</ul>
-    <ul>@Model.Title</ul>
-</li>
-
-<p>Use this area to provide additional information.</p>
+<div id="content">
+    <div class="line-hor"></div>
+    <div class="box">
+        <div class="border-right">
+            <div class="border-left">
+                <div class="inner">
+                    <h3>Movie: <span>@Model.Title</span></h3>
+                    <div class="img-box1 alt"><img src="~/images/@Model.Picture_link" alt="" />Description: @Model.Description</div>
+                    <p class="p1">Actor principal: @Model.Actor_principal</p>
+                    <p class="p1">Realisator: @Model.Realisator</p>
+                    <p class="p1">Language: @Model.Language</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

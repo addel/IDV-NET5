@@ -41,6 +41,19 @@ namespace IDV_NET5_WEB.Service
                 return null;
         }
 
+        public bool deleteUser(int id)
+        {
+
+            var resdelete = _client.DeleteAsync("http://localhost:54677/api/users/" + id).Result;
+
+            if (resdelete.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
         public List<User> List()
         {
             var result = _client.GetAsync("http://localhost:54677/api/users/list").Result;
@@ -52,5 +65,33 @@ namespace IDV_NET5_WEB.Service
             else
                 return null;
         }
+
+        public User GetSingle(int id)
+        {
+            var result = _client.GetAsync("http://localhost:54677/api/users/" + id).Result;
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<User>(result.Content.ReadAsStringAsync().Result);
+            }
+            else
+                return null;
+        }
+
+        public User Update(User user)
+        {
+            var jsonInString = JsonConvert.SerializeObject(user);
+            var result = _client.PutAsync("http://localhost:54677/api/users/", new StringContent(jsonInString, Encoding.UTF8, "application/json")).Result;
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<User>(result.Content.ReadAsStringAsync().Result);
+            }
+            else
+                return null;
+        }
+
+        
+
     }
 }

@@ -56,10 +56,13 @@ namespace IDV_NET5_API.Controllers
             return CheckAllResult(_user);
         }
 
-        // viens de la class abstraite (MasterController) pour vous amis dev vous dire qu'il faut absolument codé ces methodes
+        // PUT api/users/1
+        [HttpPut]
         public override void Put(int id, [FromBody] User value)
         {
-            throw new NotImplementedException();
+             value.Id = id;
+            _userRepository.Update(value);
+            _userRepository.Commit();
         }
 
         // Patch api/users/5
@@ -69,9 +72,19 @@ namespace IDV_NET5_API.Controllers
             value.Id = id;
             _userRepository.Update(value);
             _userRepository.Commit();
+        
         }
 
-        // delete api/users/5
+        // delete api/users/name
+        [HttpDelete("{name}")]
+        public void Delete(string name)
+        {
+            User user = _userRepository.GetUserByName(name);
+            _userRepository.Delete(user);
+            _userRepository.Commit();
+        }
+
+        // delete api/movies/5
         [HttpDelete("{id}")]
         public override void Delete(int id)
         {

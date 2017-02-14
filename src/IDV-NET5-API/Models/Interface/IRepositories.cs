@@ -12,6 +12,7 @@ namespace IDV_NET5_API.Models
 
     public interface IUserRepository : IEntityBaseRepository<User> {
         User GetUserByLogin(User user);
+        User GetUserByName(string name);
     }
 
     public interface ICommentRepository : IEntityBaseRepository<Comment> { }
