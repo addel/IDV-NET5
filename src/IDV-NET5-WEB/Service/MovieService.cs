@@ -24,6 +24,18 @@ namespace IDV_NET5_WEB.Service
                 return null;
         }
 
-        
+        public List<Movie> GetAll()
+        {
+            var result = _client.GetAsync("http://localhost:54677/api/movies/").Result;
+
+            if (result.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<List<Movie>>(result.Content.ReadAsStringAsync().Result);
+            }
+            else
+                return null;
+        }
+
+
     }
 }
