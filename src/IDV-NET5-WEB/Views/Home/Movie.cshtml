@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = @Model.Title;
+    ViewData["Title"] = @Model.Item1.Title;
 }
 <h2>@ViewData["Title"].</h2>
 
@@ -9,13 +9,44 @@
         <div class="border-right">
             <div class="border-left">
                 <div class="inner">
-                    <h3>Movie: <span>@Model.Title</span></h3>
-                    <div class="img-box1 alt"><img src="~/images/@Model.Picture_link" alt="" />Description: @Model.Description</div>
-                    <p class="p1">Actor principal: @Model.Actor_principal</p>
-                    <p class="p1">Realisator: @Model.Realisator</p>
-                    <p class="p1">Language: @Model.Language</p>
+                    <h3>Movie: <span>@Model.Item1.Title</span></h3>
+                    <div class="img-box1 alt"><img src="~/images/@Model.Item1.Picture_link" alt="" />Description: @Model.Item1.Description</div>
+                    <p class="p1">Actor principal: @Model.Item1.Actor_principal</p>
+                    <p class="p1">Realisator: @Model.Item1.Realisator</p>
+                    <p class="p1">Language: @Model.Item1.Language</p>
+                    <a asp-area="" class="link2" asp-controller="Home" asp-action="ProcessForm" asp-route-image="@Model.Item1.Picture_link"><span><span>Download</span></span></a>
                 </div>
             </div>
         </div>
     </div>
+
+    <h3><span>Comment</span></h3>
+    <ul class="list">
+        @if (Model.Item2.Count != 0)
+        {
+            @foreach (var i in Model.Item2)
+            {
+                <li>
+                    @i.Username<br />
+                    @i.Text <br />
+                    @i.DateOfPost
+                </li>
+            }
+        }
+    </ul>
+
+    <form id="contacts-form" asp-controller="Home" asp-action="PostComment" action="POST">
+        <fieldset>
+            <div class="field"><label>Your Comment:</label><textarea  cols="1" rows="1"></textarea></div>
+            <div class="wrapper">
+                <a href="#" class="link2" onclick="document.getElementById('contacts-form').submit()">
+                    <span>
+                        <span>Send Your Comment</span>
+                    </span>
+                </a>
+            </div>
+        </fieldset>
+    </form>
+
+
 </div>

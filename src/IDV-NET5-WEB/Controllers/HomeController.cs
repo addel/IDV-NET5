@@ -7,6 +7,7 @@ using IDV_NET5_WEB.Service;
 using IDV_NET5_WEB.Models;
 using Microsoft.AspNetCore.Http;
 using System.IO.Compression;
+using Microsoft.AspNetCore.Hosting;
 
 namespace IDV_NET5_WEB.Controllers
 {
@@ -14,11 +15,15 @@ namespace IDV_NET5_WEB.Controllers
     {
         private readonly UserService _service;
         private readonly MovieService _serviceMovie;
+        private readonly CommentService _serviceComment;
+        private readonly IHostingEnvironment _appEnvironment;
 
-        public HomeController(UserService service, MovieService serviceMovie)
+        public HomeController(UserService service, MovieService serviceMovie, CommentService serviceComment, IHostingEnvironment appEnvironment)
         {
             _service = service;
             _serviceMovie = serviceMovie;
+            _serviceComment = serviceComment;
+            _appEnvironment = appEnvironment;
         }
 
         public IActionResult Index(Movie movie)
@@ -43,7 +48,8 @@ namespace IDV_NET5_WEB.Controllers
 
          public IActionResult Movie(int id)
         {
-         return View(_serviceMovie.Get(id));
+            var tuple = new Tuple<Movie, List<Comment>>(_serviceMovie.Get(id), _serviceComment.GetByMovie(id));
+            return View(tuple);
         }
 
         public IActionResult Register(User user)
@@ -54,6 +60,14 @@ namespace IDV_NET5_WEB.Controllers
                 ModelState.Clear();
                 ViewBag.Message = user.FirstName + " " + user.LastName + "Ok pour registratiion";
             }
+
+            return View();
+        }
+
+        public IActionResult PostComment(Comment comment)
+        {
+
+
 
             return View();
         }
@@ -110,10 +124,11 @@ namespace IDV_NET5_WEB.Controllers
                 return BadRequest();
             }
 
-            _service.Update(user);
-            ViewBag.Message = user.FirstName + " " + user.LastName + "Ok pour update";
+            int id = int.Parse(HttpContext.Session.GetString("ID"));
+            _service.Update(id,user);
+            ViewBag.Message = user.FirstName + " " + user.LastName + " Ok pour update";
 
-            return View();
+            return RedirectToAction("Index");
         }
 
         
@@ -129,6 +144,27 @@ namespace IDV_NET5_WEB.Controllers
         public IActionResult Error()
         {
             return View();
+        }
+
+        public ActionResult ProcessForm(string image)
+        {
+            var webRoot = _appEnvironment.WebRootPath;
+            var zipfolder = System.IO.Path.Combine(webRoot, "zippedFiles");
+            var zipfile = System.IO.Path.Combine(zipfolder, "bundle.zip");
+            var imageFolder = System.IO.Path.Combine(webRoot, "images");
+            var imageFile = System.IO.Path.Combine(imageFolder, image);
+
+            if (System.IO.File.Exists(zipfile))
+            {
+                System.IO.File.Delete(zipfile);
+            }
+            
+            ZipArchive zip = ZipFile.Open(zipfile, ZipArchiveMode.Create);
+            zip.CreateEntryFromFile(imageFolder, image);
+            zip.Dispose();
+
+            // comprend pas pourquoi ça ne fonctionne pas !!!!
+            return File(zipfile,"application/zip", "bundle.zip");
         }
     }
 }
