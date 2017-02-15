@@ -57,10 +57,13 @@ namespace IDV_NET5_API.Controllers
         }
 
         // PUT api/users/1
-        [HttpPut]
+        [HttpPut("{id}")]
         public override void Put(int id, [FromBody] User value)
         {
-             value.Id = id;
+            value.Id = id;
+            User user = _userRepository.GetSingle(id);
+            value.Password = user.Password;
+            value.ConfirmPassword = user.ConfirmPassword;
             _userRepository.Update(value);
             _userRepository.Commit();
         }
@@ -70,9 +73,10 @@ namespace IDV_NET5_API.Controllers
         public void Patch(int id, [FromBody] User value)
         {
             value.Id = id;
+            
             _userRepository.Update(value);
             _userRepository.Commit();
-        
+
         }
 
         // delete api/users/name

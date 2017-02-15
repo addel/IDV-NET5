@@ -78,10 +78,10 @@ namespace IDV_NET5_WEB.Service
                 return null;
         }
 
-        public User Update(User user)
+        public User Update(int id, User user)
         {
             var jsonInString = JsonConvert.SerializeObject(user);
-            var result = _client.PutAsync("http://localhost:54677/api/users/", new StringContent(jsonInString, Encoding.UTF8, "application/json")).Result;
+            var result = _client.PutAsync("http://localhost:54677/api/users/"+id, new StringContent(jsonInString, Encoding.UTF8, "application/json")).Result;
 
             if (result.IsSuccessStatusCode)
             {

@@ -30,6 +30,7 @@ namespace IDV_NET5_WEB
             // Add framework services.
             services.AddSingleton<Service.UserService>();
             services.AddSingleton<Service.MovieService>();
+            services.AddSingleton<Service.CommentService>();
             services.AddMvc();
             services.AddDistributedMemoryCache();
             services.AddSession();
