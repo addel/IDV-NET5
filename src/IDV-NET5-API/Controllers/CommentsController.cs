@@ -58,7 +58,6 @@ namespace IDV_NET5_API.Controllers
         [HttpPut("{id}")]
         public override void Put(int id, [FromBody] Comment value)
         {
-            value.Id = id;
             _commentRepository.Update(value);
             _commentRepository.Commit();
         }

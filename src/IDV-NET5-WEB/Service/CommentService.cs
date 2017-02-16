@@ -63,6 +63,33 @@ namespace IDV_NET5_WEB.Service
                 return null;
         }
 
+        public Comment Update(Comment com)
+        {
+
+            var jsonInString = JsonConvert.SerializeObject(com);
+            var resPost = _client.PutAsync("http://localhost:54677/api/comments/5", new StringContent(jsonInString, Encoding.UTF8, "application/json")).Result;
+
+            if (resPost.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<Comment>(resPost.Content.ReadAsStringAsync().Result);
+            }
+            else
+                return null;
+        }
+
+        public bool Delete(int id)
+        {
+
+            var resdelete = _client.DeleteAsync("http://localhost:54677/api/comments/" + id).Result;
+
+            if (resdelete.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+
 
     }
 }
