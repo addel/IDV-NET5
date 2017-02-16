@@ -24,19 +24,52 @@
     </div>
 
     <h3><span>Comment</span></h3>
-    <ul class="list">
-        @if (Model.Item2.Count != 0)
+    @if (Model.Item2.Count != 0)
+    {
+        int y = 0;
+        @foreach (var i in Model.Item2)
         {
-            @foreach (var i in Model.Item2)
-            {
-                <li>
+
+                <div>
                     @i.Username<br />
                     @i.Text <br />
                     @i.DateOfPost
-                </li>
-            }
+                </div>
+
+                @if (Context.Session.GetString("username") == @i.Username)
+                {
+
+                    <a asp-area="" class="link2" asp-controller="Home" asp-action="DeleteComment" asp-route-id="@i.Id" asp-route-movieId="@Model.Item1.Id"><span><span>Delete comment</span></span></a>
+                    <a class="link2" onclick="document.getElementById(@y).hidden = false">
+                        <span>
+                            <span>Modif Your Comment</span>
+                        </span>
+                    </a>
+                }
+            <br />
+
+            <form hidden id="@y" asp-controller="Home" asp-action="UpdateComment" method="post">
+                <input hidden asp-for="Item3.MovieId" value="@Model.Item1.Id" />
+                <input hidden asp-for="Item3.Id" value="@i.Id" />
+                <fieldset>
+                    <div class="field"><label asp-for="Item3.Text" class="col-md-2 control-label">Your Comment:</label><textarea placeholder="@i.Text" asp-for="Item3.Text" rows="10" cols="50"></textarea></div>
+                    <div class="wrapper">
+                        <a class="link2" onclick="document.getElementById(@y).submit()">
+                            <span>
+                                <span>Send Your Comment</span>
+                            </span>
+                        </a>
+                    </div>
+                </fieldset>
+            </form>
+
+            <br /><br /><br /><br />
+
+          
+            y++;
+           
         }
-    </ul>
+    }
 
     @if (Context.Session.GetString("ID") != null)
     {

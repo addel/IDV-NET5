@@ -58,7 +58,8 @@ namespace IDV_NET5_API.Controllers
         [HttpPut("{id}")]
         public override void Put(int id, [FromBody] Comment value)
         {
-            throw new NotImplementedException();
+            _commentRepository.Update(value);
+            _commentRepository.Commit();
         }
 
         // Patch api/comments/5

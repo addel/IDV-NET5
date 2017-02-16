@@ -81,6 +81,34 @@ namespace IDV_NET5_WEB.Controllers
             return RedirectToAction("Movie", new { id = movieId });
         }
 
+        public IActionResult DeleteComment(int id, int movieId)
+        {
+
+            _serviceComment.Delete(id);
+
+            return RedirectToAction("Movie", new { id = movieId });
+        }
+
+        public IActionResult UpdateComment(FormCollection Form)
+        {
+            HttpRequest r = Request;
+            string movieId = r.Form["Item3.MovieId"];
+            string commentText = r.Form["Item3.Text"];
+
+            Comment com = new Comment();
+            com.Id = int.Parse(r.Form["Item3.Id"]);
+            com.MovieId = int.Parse(movieId);
+            com.Text = commentText;
+            com.Username = HttpContext.Session.GetString("username");
+            com.DateOfPost = DateTime.Now;
+
+            _serviceComment.Update(com);
+
+            return RedirectToAction("Movie", new { id = movieId });
+        }
+
+
+
         public IActionResult Login (User user)
         {
             var account = _service.Login(user);
@@ -134,6 +162,7 @@ namespace IDV_NET5_WEB.Controllers
             }
 
             int id = int.Parse(HttpContext.Session.GetString("ID"));
+            user.Id = id;
             _service.Update(id,user);
             ViewBag.Message = user.FirstName + " " + user.LastName + " Ok pour update";
 
@@ -163,11 +192,10 @@ namespace IDV_NET5_WEB.Controllers
             var imageFolder = System.IO.Path.Combine(webRoot, "images");
             var imageFile = System.IO.Path.Combine(imageFolder, image);
 
-            if (System.IO.File.Exists(zipfile))
-            {
-                System.IO.File.Delete(zipfile);
-            }
             
+                System.IO.File.Delete(zipfile);
+            
+           
             ZipArchive zip = ZipFile.Open(zipfile, ZipArchiveMode.Create);
             zip.CreateEntryFromFile(imageFolder, image);
             zip.Dispose();
