@@ -61,9 +61,9 @@ namespace IDV_NET5_API.Controllers
         public override void Put(int id, [FromBody] User value)
         {
             value.Id = id;
-            User user = _userRepository.GetSingle(id);
-            value.Password = user.Password;
-            value.ConfirmPassword = user.ConfirmPassword;
+            //User user = _userRepository.GetSingle(id);
+            value.Password = "aaa";
+            value.ConfirmPassword = "aaa";
             _userRepository.Update(value);
             _userRepository.Commit();
         }
