@@ -49,7 +49,9 @@ namespace IDV_NET5_API.Controllers
         [HttpPut("{id}")]
         public override void Put(int id, [FromBody] Movie value)
         {
-            throw new NotImplementedException();
+            value.Id = id;
+            _movieRepository.Update(value);
+            _movieRepository.Commit();
         }
 
         // Patch api/movies/5

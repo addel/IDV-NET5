@@ -58,7 +58,7 @@ namespace IDV_NET5_WEB.Controllers
             {
                 _service.Register(user);
                 ModelState.Clear();
-                ViewBag.Message = user.FirstName + " " + user.LastName + "Ok pour registratiion";
+                ViewBag.Message = user.FirstName + " " + user.LastName + " - Ok pour registration";
             }
 
             return View();
