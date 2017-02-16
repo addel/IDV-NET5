@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace IDV_NET5_WEB.Service
@@ -43,6 +44,20 @@ namespace IDV_NET5_WEB.Service
             if (result.IsSuccessStatusCode)
             {
                 return JsonConvert.DeserializeObject<List<Comment>>(result.Content.ReadAsStringAsync().Result);
+            }
+            else
+                return null;
+        }
+
+        public Comment Post(Comment com)
+        {
+
+            var jsonInString = JsonConvert.SerializeObject(com);
+            var resPost = _client.PostAsync("http://localhost:54677/api/comments/", new StringContent(jsonInString, Encoding.UTF8, "application/json")).Result;
+
+            if (resPost.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<Comment>(resPost.Content.ReadAsStringAsync().Result);
             }
             else
                 return null;
