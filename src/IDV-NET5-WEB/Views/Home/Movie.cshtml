@@ -1,4 +1,7 @@
-﻿@{
+﻿@model Tuple<Movie, List<Comment>, Comment>
+@using IDV_NET5_WEB.Models
+@using Microsoft.AspNetCore.Http
+@{
     ViewData["Title"] = @Model.Item1.Title;
 }
 <h2>@ViewData["Title"].</h2>
@@ -35,18 +38,31 @@
         }
     </ul>
 
-    <form id="contacts-form" asp-controller="Home" asp-action="PostComment" action="POST">
-        <fieldset>
-            <div class="field"><label>Your Comment:</label><textarea  cols="1" rows="1"></textarea></div>
-            <div class="wrapper">
-                <a href="#" class="link2" onclick="document.getElementById('contacts-form').submit()">
-                    <span>
-                        <span>Send Your Comment</span>
-                    </span>
-                </a>
-            </div>
-        </fieldset>
-    </form>
-
+    @if (Context.Session.GetString("ID") != null)
+    {
+        <form id="contacts-form" asp-controller="Home" asp-action="PostComment" method="post">
+            <input hidden asp-for="Item3.MovieId" value="@Model.Item1.Id" />
+            <fieldset>
+                <div class="field"><label asp-for="Item3.Text" class="col-md-2 control-label">Your Comment:</label><textarea asp-for="Item3.Text" cols="1" rows="1"></textarea></div>
+                <div class="wrapper">
+                    <a href="#" class="link2" onclick="document.getElementById('contacts-form').submit()">
+                        <span>
+                            <span>Send Your Comment</span>
+                        </span>
+                    </a>
+                </div>
+            </fieldset>
+        </form>
+    }
+    else
+    {
+        <div class="wrapper">
+            <a class="link2" asp-area="" asp-controller="Home" asp-action="Login">
+                <span>
+                    <span>Send Your Comment</span>
+                </span>
+            </a>
+        </div>
+    }
 
 </div>

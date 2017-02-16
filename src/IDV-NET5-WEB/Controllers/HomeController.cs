@@ -48,7 +48,7 @@ namespace IDV_NET5_WEB.Controllers
 
          public IActionResult Movie(int id)
         {
-            var tuple = new Tuple<Movie, List<Comment>>(_serviceMovie.Get(id), _serviceComment.GetByMovie(id));
+            var tuple = new Tuple<Movie, List<Comment>, Comment>(_serviceMovie.Get(id), _serviceComment.GetByMovie(id), new Comment());
             return View(tuple);
         }
 
@@ -64,12 +64,21 @@ namespace IDV_NET5_WEB.Controllers
             return View();
         }
 
-        public IActionResult PostComment(Comment comment)
+        public IActionResult PostComment(FormCollection Form)
         {
+            HttpRequest r =  Request;
+            string movieId = r.Form["Item3.MovieId"];
+            string commentText = r.Form["Item3.Text"];
 
+            Comment com = new Comment();
+            com.MovieId = int.Parse(movieId);
+            com.Text = commentText;
+            com.Username = HttpContext.Session.GetString("username");
+            com.DateOfPost = DateTime.Now;
 
+            _serviceComment.Post(com);
 
-            return View();
+            return RedirectToAction("Movie", new { id = movieId });
         }
 
         public IActionResult Login (User user)
